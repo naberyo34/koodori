@@ -1,0 +1,60 @@
+* {
+  font-size: 10px;
+  line-height: 1;
+}
+
+.main {
+  padding: 16px;
+}
+
+.initializeButton {
+  visibility: hidden;
+}
+
+.initializeButton.--active {
+  visibility: visible;
+}
+
+.uiWrapper {
+  visibility: hidden;
+}
+
+.uiWrapper.--active {
+  visibility: visible;
+}
+
+.waveformSelectWrapper {
+  margin-top: 8px;
+}
+
+.bpmInputWrapper {
+  margin-top: 8px;
+}
+
+.filterWrapper {
+  margin-top: 8px;
+}
+
+.noteSelectWrapper {
+  display: flex;
+  margin-top: 8px;
+}
+
+.noteGainInputWrapper {
+  display: flex;
+  margin-top: 8px;
+}
+
+.noteGainInput {
+  width: 37px;
+  -webkit-appearance: slider-vertical;
+}
+
+.patternSelectWrapper {
+  display: flex;
+  margin-top: 8px;
+}
+
+.patternSelect {
+  width: 37px;
+}

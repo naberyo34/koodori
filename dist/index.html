@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<head>
+  <title>koodori</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/common.css" />
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <main class="main">
+    <h1>koodori</h1>
+    <button
+      data-selector="initializeButton"
+      class="initializeButton --active"
+    >
+      はじめる
+    </button>
+    <div class="uiWrapper" data-selector="uiWrapper">
+      <div>
+        <button data-selector="startButton">start</button>
+        <button data-selector="stopButton">stop</button>
+      </div>
+      <div class="waveformSelectWrapper">
+        <input
+          type="radio"
+          name="waveform"
+          value="sine"
+          id="sine"
+          data-selector="waveformSelect"
+        />
+        <label for="sine">sine</label>
+        <input
+          type="radio"
+          name="waveform"
+          value="square"
+          id="square"
+          data-selector="waveformSelect"
+        />
+        <label for="square">square</label>
+        <input
+          type="radio"
+          name="waveform"
+          value="sawtooth"
+          id="sawtooth"
+          data-selector="waveformSelect"
+          checked
+        />
+        <label for="sawtooth">sawtooth</label>
+        <input
+          type="radio"
+          name="waveform"
+          value="triangle"
+          id="triangle"
+          data-selector="waveformSelect"
+        />
+        <label for="triangle">triangle</label>
+      </div>
+      <div class="bpmInputWrapper">
+        <label for="bpm">BPM: </label>
+        <input
+          type="number"
+          min="1"
+          max="999"
+          value="128"
+          id="bpm"
+          data-selector="bpmInput"
+        />
+        <label for="noteLength">Note Length: </label>
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          id="noteLength"
+          data-selector="noteLengthInput"
+        />
+      </div>
+      <div class="filterWrapper">
+        <input
+          type="radio"
+          name="filterType"
+          value="lowpass"
+          id="lowpass"
+          data-selector="filterTypeSelect"
+          checked
+        />
+        <label for="sine">LPF</label>
+        <input
+          type="radio"
+          name="filterType"
+          value="highpass"
+          id="highpass"
+          data-selector="filterTypeSelect"
+        />
+        <label for="highpass">HPF</label>
+        <label for="filterFrequency">Filter Freq: </label>
+        <input
+          type="range"
+          min="20"
+          max="15000"
+          value="15000"
+          id="filterFrequency"
+          data-selector="filterFrequencyInput"
+        />
+        <label for="filterQ">Resonance: </label>
+        <input
+          type="range"
+          min="0"
+          max="30"
+          value="10"
+          id="filterQ"
+          data-selector="filterQInput"
+        />
+      </div>
+      <div class="noteSelectWrapper">
+        <select class="noteSelect" id="note0" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note1" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note2" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note3" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note4" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note5" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note6" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note7" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note8" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note9" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note10" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note11" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note12" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note13" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note14" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+        <select class="noteSelect" id="note15" data-selector="noteSelect">
+          <option value="b4">B4</option>
+          <option value="a4">A4</option>
+          <option value="g4">G4</option>
+          <option value="f4">F4</option>
+          <option value="e4">E4</option>
+          <option value="d4">D4</option>
+          <option value="c4">C4</option>
+          <option value="b3">B3</option>
+          <option value="a3">A3</option>
+          <option value="g3">G3</option>
+          <option value="f3">F3</option>
+          <option value="e3">E3</option>
+          <option value="d3">D3</option>
+          <option value="c3">C3</option>
+          <option value="b2">B2</option>
+          <option value="a2" selected>A2</option>
+          <option value="g2">G2</option>
+          <option value="f2">F2</option>
+          <option value="e2">E2</option>
+          <option value="d2">D2</option>
+          <option value="c2">C2</option>
+        </select>
+      </div>
+      <div class="noteGainInputWrapper">
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain0"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain1"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain2"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain3"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain4"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain5"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain6"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain7"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain8"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain9"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain10"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain11"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain12"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain13"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain14"
+          data-selector="noteGainInput"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="8"
+          class="noteGainInput"
+          id="noteGain15"
+          data-selector="noteGainInput"
+        />
+      </div>
+      <h2>Synth</h2>
+      <div class="patternSelectWrapper">
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth0"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth1"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth2"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth3"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth4"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth5"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth6"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth7"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth8"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth9"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth10"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth11"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth12"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth13"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth14"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="synth15"
+          data-selector="synthPatternSelect"
+          data-type="synth"
+          checked
+        />
+      </div>
+      <h2>Kick</h2>
+      <div class="patternSelectWrapper">
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick0"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick1"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick2"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick3"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick4"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick5"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick6"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick7"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick8"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick9"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick10"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick11"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick12"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick13"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick14"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="kick15"
+          data-selector="kickPatternSelect"
+          data-type="kick"
+        />
+      </div>
+      <h2>Snare</h2>
+      <div class="patternSelectWrapper">
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare0"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare1"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare2"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare3"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare4"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare5"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare6"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare7"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare8"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare9"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare10"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare11"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare12"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare13"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare14"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="snare15"
+          data-selector="snarePatternSelect"
+          data-type="snare"
+        />
+      </div>
+      <h2>Hihat</h2>
+      <div class="patternSelectWrapper">
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat0"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat1"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat2"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat3"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat4"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat5"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat6"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat7"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat8"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat9"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat10"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat11"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat12"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat13"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat14"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+          checked
+        />
+        <input
+          type="checkbox"
+          class="patternSelect"
+          id="hihat15"
+          data-selector="hihatPatternSelect"
+          data-type="hihat"
+        />
+      </div>
+    </div>
+  </main>
+</body>
