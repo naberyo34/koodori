@@ -7,6 +7,7 @@ import {
   stopButton,
   waveformSelects,
   bpmInput,
+  masterVolumeInput,
   noteLengthInput,
   filterTypeSelects,
   filterFrequencyInput,
@@ -17,6 +18,7 @@ import {
   kickPatternSelects,
   snarePatternSelects,
   hihatPatternSelects,
+  currentNoteIndicators,
 } from './elements';
 import { pitchNameToFrequency } from './utils';
 
@@ -85,6 +87,10 @@ const getNextNoteTime = () => {
  * カウント(0 ~ 15)を進める
  */
 const stepNextNote = () => {
+  currentNoteIndicators.forEach((currentNoteIndicator) => {
+    currentNoteIndicator.classList.remove('--active');
+  });
+  currentNoteIndicators[store.currentNote].classList.add('--active');
   store.currentNote += 1;
   if (store.currentNote === 16) {
     store.currentNote = 0;
@@ -149,7 +155,8 @@ const initializeAudio = () => {
     frequency: store.filterFrequency,
     Q: store.filterQ,
   });
-  masterGainNode = new GainNode(audioCtx);
+  masterGainNode = new GainNode(audioCtx, { gain: store.masterVolume * 0.01 });
+  console.log({ masterGainNode });
   biquadFilterNode.connect(masterGainNode);
   masterGainNode.connect(audioCtx.destination);
 };
@@ -213,6 +220,16 @@ const handleChangeBpm = (e: Event) => {
     return;
   }
   store.bpm = value;
+};
+
+const handleChangeMasterVolume = (e: Event) => {
+  if (!(e.currentTarget instanceof HTMLInputElement)) return;
+  const value = Number(e.currentTarget.value);
+  if (value < 0 || value > 80) {
+    alert('無効な値です。');
+  }
+  store.masterVolume = value;
+  masterGainNode.gain.value = store.masterVolume * 0.01;
 };
 
 const handleChangeNoteLength = (e: Event) => {
@@ -297,6 +314,7 @@ waveformSelects.forEach((waveformSelect) => {
   waveformSelect.addEventListener('change', handleChangeWaveform);
 });
 bpmInput?.addEventListener('input', handleChangeBpm);
+masterVolumeInput?.addEventListener('input', handleChangeMasterVolume);
 noteLengthInput?.addEventListener('input', handleChangeNoteLength);
 filterTypeSelects.forEach((filterTypeSelect) => {
   filterTypeSelect.addEventListener('change', handleChangeFilterType);

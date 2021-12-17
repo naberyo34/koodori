@@ -101,6 +101,7 @@ const hihatPattern = [
   true,
   false,
 ];
+const masterVolume = 40;
 const bpm = 128;
 const initialized = false;
 const playing = false;
@@ -118,6 +119,7 @@ const store = {
   kickPattern,
   snarePattern,
   hihatPattern,
+  masterVolume,
   bpm,
   initialized,
   playing,

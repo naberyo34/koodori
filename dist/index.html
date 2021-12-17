@@ -8,10 +8,7 @@
 <body>
   <main class="main">
     <h1>koodori</h1>
-    <button
-      data-selector="initializeButton"
-      class="initializeButton --active"
-    >
+    <button data-selector="initializeButton" class="initializeButton --active">
       はじめる
     </button>
     <div class="uiWrapper" data-selector="uiWrapper">
@@ -72,6 +69,15 @@
           value="8"
           id="noteLength"
           data-selector="noteLengthInput"
+        />
+        <label for="masterVolume">Master Volume: </label>
+        <input
+          type="range"
+          min="0"
+          max="80"
+          value="40"
+          id="masterVolume"
+          data-selector="masterVolumeInput"
         />
       </div>
       <div class="filterWrapper">
@@ -1104,6 +1110,30 @@
           data-selector="hihatPatternSelect"
           data-type="hihat"
         />
+      </div>
+      <div class="currentNoteWrapper">
+        <div
+          class="currentNote --active"
+          id="note0"
+          data-selector="currentNote"
+        >
+          *
+        </div>
+        <div class="currentNote" id="note1" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note2" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note3" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note4" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note5" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note6" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note7" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note8" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note9" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note10" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note11" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note12" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note13" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note14" data-selector="currentNote">*</div>
+        <div class="currentNote" id="note15" data-selector="currentNote">*</div>
       </div>
     </div>
   </main>

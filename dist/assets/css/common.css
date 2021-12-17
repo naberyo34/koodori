@@ -58,3 +58,18 @@
 .patternSelect {
   width: 37px;
 }
+
+.currentNoteWrapper {
+  display: flex;
+  margin-top: 8px;
+}
+
+.currentNote {
+  width: 37px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.currentNote.--active {
+  color: red;
+}

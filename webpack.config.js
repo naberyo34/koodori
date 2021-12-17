@@ -6,6 +6,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.join(__dirname, 'dist/assets/js'),
+    publicPath: '/assets/js',
   },
   module: {
     rules: [
@@ -24,5 +25,6 @@ module.exports = {
     },
     compress: true,
     port: 9000,
+    open: true,
   },
 };

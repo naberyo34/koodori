@@ -8,6 +8,9 @@ const waveformSelects = document.querySelectorAll(
   '[data-selector=waveformSelect]',
 );
 const bpmInput = document.querySelector('[data-selector=bpmInput]');
+const masterVolumeInput = document.querySelector(
+  '[data-selector=masterVolumeInput]',
+);
 const noteLengthInput = document.querySelector(
   '[data-selector=noteLengthInput]',
 );
@@ -34,6 +37,9 @@ const snarePatternSelects = document.querySelectorAll(
 const hihatPatternSelects = document.querySelectorAll(
   '[data-selector=hihatPatternSelect]',
 );
+const currentNoteIndicators = document.querySelectorAll(
+  '[data-selector=currentNote]',
+);
 
 export {
   initializeButton,
@@ -42,6 +48,7 @@ export {
   stopButton,
   waveformSelects,
   bpmInput,
+  masterVolumeInput,
   noteLengthInput,
   filterTypeSelects,
   filterFrequencyInput,
@@ -52,4 +59,5 @@ export {
   kickPatternSelects,
   snarePatternSelects,
   hihatPatternSelects,
+  currentNoteIndicators,
 };
