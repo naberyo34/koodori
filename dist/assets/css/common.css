@@ -120,8 +120,54 @@ html {
   justify-content: flex-end;
 }
 
+.bankWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bankInner {
+  display: flex;
+}
+
+.bank {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.bank__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 37px;
+  height: 37px;
+  font-size: 16px;
+  border: 2px solid #c0c0c0;
+  border-radius: 4px;
+}
+
+.bank__label:hover {
+  opacity: 0.6;
+}
+
+.bank:checked + .bank__label {
+  color: #fff;
+  background: #00bfff;
+}
+
+.bank.--reserve + .bank__label {
+  color: #2c2c2c;
+  background: #c0c0c0;
+}
+
+.bank__label:not(:first-of-type) {
+  margin-left: 8px;
+}
+
 .player {
   display: flex;
+  margin-left: 16px;
 }
 
 .player__button {
@@ -260,7 +306,7 @@ html {
 .sequencer__noteSelect {
   width: 37px;
   height: 37px;
-  padding: 4px 4px;
+  padding: 4px;
   margin-left: 4px;
   font-size: 12px;
   border: 2px solid #c0c0c0;

@@ -3,6 +3,7 @@ import store from './store';
 import {
   initializeButton,
   uiWrapper,
+  bankSelects,
   startButton,
   stopButton,
   waveformSelects,
@@ -42,7 +43,7 @@ let worker: Worker;
  */
 const scheduleNote = (time: number, synthOption: SynthOption) => {
   // シンセサイザー
-  if (store.synthPattern[store.currentNote]) {
+  if (store.synthPattern[store.currentBank][store.currentNote]) {
     const { waveform, gain, pitchName, length } = synthOption;
     const oscNode = new OscillatorNode(audioCtx, { type: waveform });
     const noteGainNode = new GainNode(audioCtx, { gain });
@@ -54,7 +55,7 @@ const scheduleNote = (time: number, synthOption: SynthOption) => {
   }
 
   // キック
-  if (store.kickPattern[store.currentNote]) {
+  if (store.kickPattern[store.currentBank][store.currentNote]) {
     const kickNode = audioCtx.createBufferSource();
     kickNode.buffer = kickBuffer;
     kickNode.connect(masterFilterNode);
@@ -62,7 +63,7 @@ const scheduleNote = (time: number, synthOption: SynthOption) => {
   }
 
   // スネア
-  if (store.snarePattern[store.currentNote]) {
+  if (store.snarePattern[store.currentBank][store.currentNote]) {
     const snareNode = audioCtx.createBufferSource();
     snareNode.buffer = snareBuffer;
     snareNode.connect(masterFilterNode);
@@ -70,7 +71,7 @@ const scheduleNote = (time: number, synthOption: SynthOption) => {
   }
 
   // ハイハット
-  if (store.hihatPattern[store.currentNote]) {
+  if (store.hihatPattern[store.currentBank][store.currentNote]) {
     const hihatNode = audioCtx.createBufferSource();
     hihatNode.buffer = hihatBuffer;
     hihatNode.connect(masterFilterNode);
@@ -101,11 +102,26 @@ const stepNextNote = () => {
   }
 };
 
+/** バンクの変更が予約されているとき、16小節目になったらバンクを切り替える */
+const changeReserveCurrentBank = () => {
+  // reserveBankが0のときもfalseにならないよう、typeofで判定
+  if (store.currentNote === 15 && typeof store.reserveBank === 'number') {
+    store.currentBank = store.reserveBank;
+    refreshDom();
+    store.reserveBank = false;
+    // バンクボタンの予約表示を解除
+    bankSelects.forEach((bankSelect) => {
+      bankSelect.classList.remove('--reserve');
+    })
+  }
+};
+
 /**
  * ループで定期実行される
  * (1) scheduleNoteで、直近のノート発音時間の準備
  * (2) getNextNoteTimeで、その次のノート発音時間を算出
  * (3) stepNextNoteで、カウント(0 ~ 15)を進める
+ * (4) changeReserveCurrentBankで、16小節目にバンクを切り替える
  */
 const scheduler = () => {
   const scheduleAheadTime = 0.1;
@@ -114,12 +130,13 @@ const scheduler = () => {
     const noteTime = secondsPerBeat * 0.25;
     scheduleNote(store.nextNoteTime, {
       waveform: store.currentWaveform,
-      gain: store.noteGain[store.currentNote] * 0.1,
-      pitchName: store.phrase[store.currentNote],
+      gain: store.noteGain[store.currentBank][store.currentNote] * 0.1,
+      pitchName: store.phrase[store.currentBank][store.currentNote],
       length: noteTime * store.noteLength * 0.1,
     });
     getNextNoteTime();
     stepNextNote();
+    changeReserveCurrentBank();
   }
 };
 
@@ -133,6 +150,30 @@ const setupSample = async (samplePath: string) => {
   const arrayBuffer = await response.arrayBuffer();
   const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
   return audioBuffer;
+};
+
+/**
+ * 選択したバンクをDOMに反映する
+ */
+const refreshDom = () => {
+  noteSelects.forEach((noteSelect, index) => {
+    noteSelect.value = store.phrase[store.currentBank][index];
+  });
+  noteGainInputs.forEach((noteGainInput, index) => {
+    noteGainInput.value = store.noteGain[store.currentBank][index].toString();
+  });
+  synthPatternSelects.forEach((patternSelect, index) => {
+    patternSelect.checked = store.synthPattern[store.currentBank][index];
+  });
+  kickPatternSelects.forEach((patternSelect, index) => {
+    patternSelect.checked = store.kickPattern[store.currentBank][index];
+  });
+  snarePatternSelects.forEach((patternSelect, index) => {
+    patternSelect.checked = store.snarePattern[store.currentBank][index];
+  });
+  hihatPatternSelects.forEach((patternSelect, index) => {
+    patternSelect.checked = store.hihatPattern[store.currentBank][index];
+  });
 };
 
 /**
@@ -198,7 +239,24 @@ const handleInitialize = async () => {
   store.initialized = true;
   initializeButton?.classList.remove(activeClass);
   uiWrapper?.classList.add(activeClass);
+  refreshDom();
 };
+
+const handleChangeBank = (e: Event) => {
+  if (!(e.currentTarget instanceof HTMLInputElement)) return;
+
+  if (store.currentNote === 15) {
+    const value = Number(e.currentTarget.value);
+    store.currentBank = value;
+    refreshDom();
+  } else {
+    const value = Number(e.currentTarget.value);
+    store.reserveBank = value;
+    // バンクボタンを予約中の表示に
+    bankSelects[value].classList.add('--reserve');
+  }
+};
+
 const handleStart = () => {
   if (store.playing) return;
   store.currentNote = 0;
@@ -214,7 +272,6 @@ const handleStop = () => {
 
 const handleChangeWaveform = (e: Event) => {
   if (!(e.currentTarget instanceof HTMLInputElement)) return;
-
   const value = e.currentTarget.value as Waveform;
   store.currentWaveform = value;
 };
@@ -241,7 +298,6 @@ const handleChangeMasterVolume = (e: Event) => {
 
 const handleChangeMasterFilterType = (e: Event) => {
   if (!(e.currentTarget instanceof HTMLInputElement)) return;
-
   const value = e.currentTarget.value as Filter;
   store.currentMasterFilter = value;
   masterFilterNode.type = store.currentMasterFilter;
@@ -280,7 +336,6 @@ const handleChangeNoteLength = (e: Event) => {
 
 const handleChangeFilterType = (e: Event) => {
   if (!(e.currentTarget instanceof HTMLInputElement)) return;
-
   const value = e.currentTarget.value as Filter;
   store.currentFilter = value;
   synthFilterNode.type = store.currentFilter;
@@ -315,36 +370,38 @@ const handleChangeNoteGain = (e: Event, index: number) => {
     alert('無効な値です。');
     return;
   }
-  store.noteGain[index] = value;
+  store.noteGain[store.currentBank][index] = value;
 };
 
 const handleChangePhrase = (e: Event, index: number) => {
   if (!(e.currentTarget instanceof HTMLSelectElement)) return;
   const value = e.currentTarget.value as PitchName;
-  store.phrase[index] = value;
+  store.phrase[store.currentBank][index] = value;
 };
 
 const handleChangePattern = (e: Event, index: number) => {
   if (!(e.currentTarget instanceof HTMLInputElement)) return;
   const value = e.currentTarget.checked;
   const { type } = e.currentTarget.dataset;
-
   if (type === 'synth') {
-    store.synthPattern[index] = value;
+    store.synthPattern[store.currentBank][index] = value;
   }
   if (type === 'kick') {
-    store.kickPattern[index] = value;
+    store.kickPattern[store.currentBank][index] = value;
   }
   if (type === 'snare') {
-    store.snarePattern[index] = value;
+    store.snarePattern[store.currentBank][index] = value;
   }
   if (type === 'hihat') {
-    store.hihatPattern[index] = value;
+    store.hihatPattern[store.currentBank][index] = value;
   }
 };
 
 // イベントに関数を割当
 initializeButton?.addEventListener('click', handleInitialize);
+bankSelects.forEach((bankSelect) => {
+  bankSelect.addEventListener('change', handleChangeBank);
+});
 startButton?.addEventListener('click', handleStart);
 stopButton?.addEventListener('click', handleStop);
 waveformSelects.forEach((waveformSelect) => {

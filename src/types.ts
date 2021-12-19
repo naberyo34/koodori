@@ -51,4 +51,6 @@ type SynthOption = {
   length: number;
 };
 
-export { Waveform, Filter, PitchName, SynthOption };
+type ReserveBank = number | boolean;
+
+export { Waveform, Filter, PitchName, SynthOption, ReserveBank };
