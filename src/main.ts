@@ -122,7 +122,7 @@ const changeReserveCurrentBank = () => {
  * (1) scheduleNoteで、直近のノート発音時間の準備
  * (2) getNextNoteTimeで、その次のノート発音時間を算出
  * (3) stepNextNoteで、カウント(0 ~ 15)を進める
- * (4) changeReserveCurrentBankで、16小節目にバンクを切り替える
+ * (4) changeReserveCurrentBankで、1小節の演奏が終わった段階でバンクを切り替える
  */
 const scheduler = () => {
   const scheduleAheadTime = 0.1;
