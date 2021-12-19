@@ -108,11 +108,11 @@ const changeReserveCurrentBank = () => {
   if (store.currentNote === 15 && typeof store.reserveBank === 'number') {
     store.currentBank = store.reserveBank;
     refreshDom();
+    // バンクボタンの予約を解除
     store.reserveBank = false;
-    // バンクボタンの予約表示を解除
     bankSelects.forEach((bankSelect) => {
       bankSelect.classList.remove('--reserve');
-    })
+    });
   }
 };
 
@@ -153,7 +153,7 @@ const setupSample = async (samplePath: string) => {
 };
 
 /**
- * 選択したバンクをDOMに反映する
+ * 選択中のバンク状態をDOMに反映する
  */
 const refreshDom = () => {
   noteSelects.forEach((noteSelect, index) => {
@@ -268,6 +268,15 @@ const handleStart = () => {
 const handleStop = () => {
   worker.postMessage('stop');
   store.playing = false;
+  // 停止時にバンクボタンの予約がされている場合、移動して予約を解除
+  if (typeof store.reserveBank === 'number') {
+    store.currentBank = store.reserveBank;
+    refreshDom();
+    store.reserveBank = false;
+    bankSelects.forEach((bankSelect) => {
+      bankSelect.classList.remove('--reserve');
+    });
+  }
 };
 
 const handleChangeWaveform = (e: Event) => {
