@@ -245,7 +245,7 @@ const handleInitialize = async () => {
 const handleChangeBank = (e: Event) => {
   if (!(e.currentTarget instanceof HTMLInputElement)) return;
 
-  if (store.currentNote === 15) {
+  if (!store.playing || store.currentNote === 15) {
     const value = Number(e.currentTarget.value);
     store.currentBank = value;
     refreshDom();
