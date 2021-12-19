@@ -40,6 +40,7 @@ html {
   visibility: hidden;
   transition: opacity 0.2s, visibility 0.2s;
   appearance: none;
+  -webkit-appearance: none;
 }
 
 .initializeButton.--active {
@@ -65,13 +66,19 @@ html {
   margin-left: 16px;
 }
 
+.knob--shortMargin {
+  margin-left: 8px;
+}
+
 .knob__label {
   margin-top: 4px;
+  white-space: nowrap;
 }
 
 .radioButton {
   position: relative;
   appearance: none;
+  -webkit-appearance: none;
 }
 
 .radioButton::before {
@@ -94,7 +101,7 @@ html {
   background: #00bfff;
   border: 2px solid #2c2c2c;
   border-radius: 50%;
-  box-shadow: 0 0 4px 0 #1e90ff;
+  box-shadow: 0 0 4px 0 #00bfff;
 }
 
 .radioButton__label {
@@ -128,6 +135,7 @@ html {
   border-radius: 4px;
   box-shadow: 0 4px 0 0 #d3d3d3;
   appearance: none;
+  -webkit-appearance: none;
 }
 
 .player__button:active {
@@ -158,6 +166,7 @@ html {
   border: 2px solid #c0c0c0;
   border-radius: 4px;
   appearance: none;
+  -webkit-appearance: none;
 }
 
 .bpm__label {
@@ -195,7 +204,7 @@ html {
   align-items: center;
 }
 
-.synthControl__filter {
+.synthControl__sub {
   display: flex;
   padding-left: 8px;
   margin-left: 16px;
@@ -209,6 +218,17 @@ html {
 .synthControl__filterTypeSelect {
   display: flex;
   align-items: center;
+}
+
+.synthControl__dj {
+  margin-left: 8px;
+  padding-left: 8px;
+  display: flex;
+  border-left: 2px solid #c0c0c0;
+}
+
+.synthControl__dj .synthControl__filterType {
+  margin-left: 0;
 }
 
 .sequencer {
@@ -240,11 +260,12 @@ html {
 .sequencer__noteSelect {
   width: 37px;
   height: 37px;
-  padding: 4px 8px;
+  padding: 4px 4px;
   margin-left: 4px;
   font-size: 12px;
   border: 2px solid #c0c0c0;
   border-radius: 4px;
+  appearance: none;
   -webkit-appearance: none;
 }
 
@@ -258,10 +279,10 @@ html {
 }
 
 .sequencer__noteGainInput {
-  margin-left: 4px;
+  display: flex;
+  justify-content: center;
   width: 37px;
-  height: 80px;
-  -webkit-appearance: slider-vertical;
+  margin-left: 4px;
 }
 
 .sequencer__patternSelectWrapper {
@@ -277,16 +298,18 @@ html {
   background: #e5e5e5;
   border-radius: 4px;
   appearance: none;
+  -webkit-appearance: none;
 }
 
 .sequencer__patternSelect:checked::after {
   content: '';
   position: absolute;
+  top: 8px;
+  left: 8px;
   display: block;
-  width: 37px;
-  height: 37px;
+  width: 21px;
+  height: 21px;
   background: #00bfff;
-  border: 8px solid #e5e5e5;
   border-radius: 4px;
 }
 
@@ -331,5 +354,5 @@ html {
   background: #00bfff;
   border: 2px solid #2c2c2c;
   border-radius: 50%;
-  box-shadow: 0 0 8px 0 #1e90ff;
+  box-shadow: 0 0 8px 0 #00bfff;
 }

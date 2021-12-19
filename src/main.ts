@@ -8,6 +8,9 @@ import {
   waveformSelects,
   bpmInput,
   masterVolumeInput,
+  masterFilterTypeSelects,
+  masterFilterFrequencyInput,
+  masterFilterQInput,
   noteLengthInput,
   filterTypeSelects,
   filterFrequencyInput,
@@ -25,7 +28,8 @@ import { pitchNameToFrequency } from './utils';
 // 初期化して使う
 let audioCtx: AudioContext;
 let masterGainNode: GainNode;
-let biquadFilterNode: BiquadFilterNode;
+let synthFilterNode: BiquadFilterNode;
+let masterFilterNode: BiquadFilterNode;
 let kickBuffer: AudioBuffer;
 let snareBuffer: AudioBuffer;
 let hihatBuffer: AudioBuffer;
@@ -44,7 +48,7 @@ const scheduleNote = (time: number, synthOption: SynthOption) => {
     const noteGainNode = new GainNode(audioCtx, { gain });
     oscNode.frequency.value = pitchNameToFrequency(pitchName);
     oscNode.connect(noteGainNode);
-    noteGainNode.connect(biquadFilterNode);
+    noteGainNode.connect(synthFilterNode);
     oscNode.start(time);
     oscNode.stop(time + length);
   }
@@ -53,7 +57,7 @@ const scheduleNote = (time: number, synthOption: SynthOption) => {
   if (store.kickPattern[store.currentNote]) {
     const kickNode = audioCtx.createBufferSource();
     kickNode.buffer = kickBuffer;
-    kickNode.connect(masterGainNode);
+    kickNode.connect(masterFilterNode);
     kickNode.start(time);
   }
 
@@ -61,7 +65,7 @@ const scheduleNote = (time: number, synthOption: SynthOption) => {
   if (store.snarePattern[store.currentNote]) {
     const snareNode = audioCtx.createBufferSource();
     snareNode.buffer = snareBuffer;
-    snareNode.connect(masterGainNode);
+    snareNode.connect(masterFilterNode);
     snareNode.start(time);
   }
 
@@ -69,7 +73,7 @@ const scheduleNote = (time: number, synthOption: SynthOption) => {
   if (store.hihatPattern[store.currentNote]) {
     const hihatNode = audioCtx.createBufferSource();
     hihatNode.buffer = hihatBuffer;
-    hihatNode.connect(masterGainNode);
+    hihatNode.connect(masterFilterNode);
     hihatNode.start(time);
   }
 };
@@ -145,19 +149,22 @@ const initializeDrums = async () => {
 
 /**
  * オーディオ周りの初期化
- * 以下のようにconnectする
- * [フィルター (biquadFilterNode)]->[全体ボリューム (masterGainNode)]->[出力 (audioCtx.destination)]
  */
 const initializeAudio = () => {
   audioCtx = new AudioContext();
-  biquadFilterNode = new BiquadFilterNode(audioCtx, {
+  synthFilterNode = new BiquadFilterNode(audioCtx, {
     type: store.currentFilter,
     frequency: store.filterFrequency,
     Q: store.filterQ,
   });
+  masterFilterNode = new BiquadFilterNode(audioCtx, {
+    type: store.currentMasterFilter,
+    frequency: store.masterFilterFrequency,
+    Q: store.masterFilterQ,
+  });
   masterGainNode = new GainNode(audioCtx, { gain: store.masterVolume * 0.01 });
-  console.log({ masterGainNode });
-  biquadFilterNode.connect(masterGainNode);
+  synthFilterNode.connect(masterFilterNode);
+  masterFilterNode.connect(masterGainNode);
   masterGainNode.connect(audioCtx.destination);
 };
 
@@ -225,11 +232,41 @@ const handleChangeBpm = (e: Event) => {
 const handleChangeMasterVolume = (e: Event) => {
   if (!(e.currentTarget instanceof HTMLInputElement)) return;
   const value = Number(e.currentTarget.value);
-  if (value < 0 || value > 80) {
+  if (value < 0 || value > 50) {
     alert('無効な値です。');
   }
   store.masterVolume = value;
   masterGainNode.gain.value = store.masterVolume * 0.01;
+};
+
+const handleChangeMasterFilterType = (e: Event) => {
+  if (!(e.currentTarget instanceof HTMLInputElement)) return;
+
+  const value = e.currentTarget.value as Filter;
+  store.currentMasterFilter = value;
+  masterFilterNode.type = store.currentMasterFilter;
+};
+
+const handleChangeMasterFilterFrequency = (e: Event) => {
+  if (!(e.currentTarget instanceof HTMLInputElement)) return;
+  const value = Number(e.currentTarget.value);
+  if (value < 20 || value > 15000) {
+    alert('無効な値です。');
+    return;
+  }
+  store.masterFilterFrequency = value;
+  masterFilterNode.frequency.value = store.masterFilterFrequency;
+};
+
+const handleChangeMasterFilterQ = (e: Event) => {
+  if (!(e.currentTarget instanceof HTMLInputElement)) return;
+  const value = Number(e.currentTarget.value);
+  if (value < 0 || value > 30) {
+    alert('無効な値です。');
+    return;
+  }
+  store.masterFilterQ = value;
+  masterFilterNode.Q.value = store.masterFilterQ;
 };
 
 const handleChangeNoteLength = (e: Event) => {
@@ -246,18 +283,18 @@ const handleChangeFilterType = (e: Event) => {
 
   const value = e.currentTarget.value as Filter;
   store.currentFilter = value;
-  biquadFilterNode.type = store.currentFilter;
+  synthFilterNode.type = store.currentFilter;
 };
 
 const handleChangeFilterFrequency = (e: Event) => {
   if (!(e.currentTarget instanceof HTMLInputElement)) return;
   const value = Number(e.currentTarget.value);
-  if (value < 20 || value > 20000) {
+  if (value < 20 || value > 15000) {
     alert('無効な値です。');
     return;
   }
   store.filterFrequency = value;
-  biquadFilterNode.frequency.value = store.filterFrequency;
+  synthFilterNode.frequency.value = store.filterFrequency;
 };
 
 const handleChangeFilterQ = (e: Event) => {
@@ -268,7 +305,7 @@ const handleChangeFilterQ = (e: Event) => {
     return;
   }
   store.filterQ = value;
-  biquadFilterNode.Q.value = store.filterQ;
+  synthFilterNode.Q.value = store.filterQ;
 };
 
 const handleChangeNoteGain = (e: Event, index: number) => {
@@ -315,6 +352,17 @@ waveformSelects.forEach((waveformSelect) => {
 });
 bpmInput?.addEventListener('input', handleChangeBpm);
 masterVolumeInput?.addEventListener('input', handleChangeMasterVolume);
+masterFilterTypeSelects.forEach((masterFilterTypeSelect) => {
+  masterFilterTypeSelect.addEventListener(
+    'change',
+    handleChangeMasterFilterType,
+  );
+});
+masterFilterFrequencyInput?.addEventListener(
+  'input',
+  handleChangeMasterFilterFrequency,
+);
+masterFilterQInput?.addEventListener('input', handleChangeMasterFilterQ);
 noteLengthInput?.addEventListener('input', handleChangeNoteLength);
 filterTypeSelects.forEach((filterTypeSelect) => {
   filterTypeSelect.addEventListener('change', handleChangeFilterType);

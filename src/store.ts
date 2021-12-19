@@ -9,6 +9,9 @@ const currentWaveform = 'sawtooth';
 const currentFilter = 'lowpass';
 const filterFrequency = 15000; // 15000 ~ 20
 const filterQ = 10 // 0 ~ 30;
+const currentMasterFilter = 'lowpass';
+const masterFilterFrequency = 15000;
+const masterFilterQ = 0;
 const noteLength = 8;
 const noteGain = [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8];
 const phrase: PitchName[] = [
@@ -101,7 +104,7 @@ const hihatPattern = [
   true,
   false,
 ];
-const masterVolume = 40;
+const masterVolume = 25;
 const bpm = 128;
 const initialized = false;
 const playing = false;
@@ -112,6 +115,9 @@ const store = {
   currentFilter: currentFilter as Filter,
   filterFrequency,
   filterQ,
+  currentMasterFilter: currentMasterFilter as Filter,
+  masterFilterFrequency,
+  masterFilterQ,
   noteLength,
   noteGain,
   phrase,

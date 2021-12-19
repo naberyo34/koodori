@@ -60,8 +60,8 @@
                   <input
                     type="range"
                     min="0"
-                    max="80"
-                    value="40"
+                    max="50"
+                    value="25"
                     class="input-knob"
                     id="masterVolume"
                     data-selector="masterVolumeInput"
@@ -140,7 +140,7 @@
                 <label for="noteLength" class="knob__label">LENGTH</label>
               </div>
             </div>
-            <div class="synthControl__filter">
+            <div class="synthControl__sub">
               <h2 class="synthControl__heading">FILTER</h2>
               <div class="synthControl__filterType">
                 <div class="synthControl__filterTypeSelect">
@@ -196,6 +196,98 @@
                 <label for="filterQ" class="knob__label">RES</label>
               </div>
             </div>
+            <div class="synthControl__sub">
+              <h2 class="synthControl__heading">EFFECT</h2>
+              <div class="knob">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="0"
+                  class="input-knob"
+                  id="reverb"
+                  data-selector="reverbInput"
+                  data-diameter="40"
+                  data-src="assets/image/knob.svg"
+                />
+                <label for="reverb" class="knob__label">REVERB</label>
+              </div>
+              <div class="knob">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="0"
+                  class="input-knob"
+                  id="delay"
+                  data-selector="delayInput"
+                  data-diameter="40"
+                  data-src="assets/image/knob.svg"
+                />
+                <label for="delay" class="knob__label">DELAY</label>
+              </div>
+              <div class="synthControl__dj">
+                <div class="synthControl__filterType">
+                  <div class="synthControl__filterTypeSelect">
+                    <input
+                      type="radio"
+                      name="masterFilterType"
+                      value="lowpass"
+                      class="radioButton"
+                      id="masterLowpass"
+                      data-selector="masterFilterTypeSelect"
+                      checked
+                    />
+                    <label for="masterLowpass" class="radioButton__label"
+                      >LPF</label
+                    >
+                  </div>
+                  <div class="synthControl__filterTypeSelect">
+                    <input
+                      type="radio"
+                      name="masterFilterType"
+                      value="highpass"
+                      class="radioButton"
+                      id="masterHighpass"
+                      data-selector="masterFilterTypeSelect"
+                    />
+                    <label for="masterHighpass" class="radioButton__label"
+                      >HPF</label
+                    >
+                  </div>
+                </div>
+                <div class="knob knob--shortMargin">
+                  <input
+                    type="range"
+                    min="20"
+                    max="15000"
+                    value="15000"
+                    class="input-knob"
+                    id="masterFilterFrequency"
+                    data-selector="masterFilterFrequencyInput"
+                    data-diameter="40"
+                    data-src="assets/image/knob.svg"
+                  />
+                  <label for="masterFilterFrequency" class="knob__label"
+                    >DJ-FILTER</label
+                  >
+                </div>
+                <div class="knob">
+                  <input
+                    type="range"
+                    min="0"
+                    max="30"
+                    value="0"
+                    class="input-knob"
+                    id="masterfilterQ"
+                    data-selector="masterFilterQInput"
+                    data-diameter="40"
+                    data-src="assets/image/knob.svg"
+                  />
+                  <label for="masterfilterQ" class="knob__label">RES</label>
+                </div>
+              </div>
+            </div>
           </section>
           <section class="sequencer">
             <h2 class="sequencer__heading">STEP SEQUENCER</h2>
@@ -207,25 +299,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -234,25 +341,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -261,25 +383,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -288,25 +425,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -315,25 +467,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -342,25 +509,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -369,25 +551,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -396,25 +593,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -423,25 +635,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -450,25 +677,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -477,25 +719,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -504,25 +761,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -531,25 +803,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -558,25 +845,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -585,25 +887,40 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
               <select
@@ -612,174 +929,285 @@
                 data-selector="noteSelect"
               >
                 <option value="b4">B4</option>
+                <option value="a#4">A#4</option>
                 <option value="a4">A4</option>
+                <option value="g#4">G#4</option>
                 <option value="g4">G4</option>
+                <option value="f#4">F#4</option>
                 <option value="f4">F4</option>
                 <option value="e4">E4</option>
+                <option value="d#4">D#4</option>
                 <option value="d4">D4</option>
+                <option value="c#4">C#4</option>
                 <option value="c4">C4</option>
                 <option value="b3">B3</option>
+                <option value="a#3">A#3</option>
                 <option value="a3">A3</option>
+                <option value="g#3">G#3</option>
                 <option value="g3">G3</option>
+                <option value="f#3">F#3</option>
                 <option value="f3">F3</option>
                 <option value="e3">E3</option>
+                <option value="d#3">D#3</option>
                 <option value="d3">D3</option>
+                <option value="c#3">C#3</option>
                 <option value="c3">C3</option>
                 <option value="b2">B2</option>
+                <option value="a#2">A#2</option>
                 <option value="a2" selected>A2</option>
+                <option value="g#2">G#2</option>
                 <option value="g2">G2</option>
+                <option value="f#2">F#2</option>
                 <option value="f2">F2</option>
                 <option value="e2">E2</option>
+                <option value="d#2">D#2</option>
                 <option value="d2">D2</option>
+                <option value="c#2">C#2</option>
                 <option value="c2">C2</option>
               </select>
             </div>
             <div class="sequencer__noteGainInputWrapper">
               <h3 class="sequencer__subHeading">VOLUME</h3>
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain0"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain1"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain2"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain3"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain4"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain5"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain6"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain7"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain8"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain9"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain10"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain11"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain12"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain13"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain14"
-                data-selector="noteGainInput"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value="8"
-                class="sequencer__noteGainInput"
-                id="noteGain15"
-                data-selector="noteGainInput"
-              />
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain0"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain1"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain2"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain3"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain4"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain5"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain6"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain7"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain8"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain9"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain10"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain11"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain12"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain13"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain14"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
+              <div class="sequencer__noteGainInput">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value="8"
+                  class="input-slider"
+                  id="noteGain15"
+                  data-selector="noteGainInput"
+                  data-width="10"
+                  data-height="80"
+                  data-fgcolor="#00bfff"
+                  data-bgcolor="#2c2c2c"
+                />
+              </div>
             </div>
           </section>
           <div class="sequencer__patternSelectWrapper">

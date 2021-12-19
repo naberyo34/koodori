@@ -11,6 +11,15 @@ const bpmInput = document.querySelector('[data-selector=bpmInput]');
 const masterVolumeInput = document.querySelector(
   '[data-selector=masterVolumeInput]',
 );
+const masterFilterTypeSelects = document.querySelectorAll(
+  '[data-selector=masterFilterTypeSelect]',
+);
+const masterFilterFrequencyInput = document.querySelector(
+  '[data-selector=masterFilterFrequencyInput]',
+);
+const masterFilterQInput = document.querySelector(
+  '[data-selector=masterFilterQInput]',
+);
 const noteLengthInput = document.querySelector(
   '[data-selector=noteLengthInput]',
 );
@@ -49,6 +58,9 @@ export {
   waveformSelects,
   bpmInput,
   masterVolumeInput,
+  masterFilterTypeSelects,
+  masterFilterFrequencyInput,
+  masterFilterQInput,
   noteLengthInput,
   filterTypeSelects,
   filterFrequencyInput,
