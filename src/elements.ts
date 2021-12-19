@@ -7,6 +7,9 @@ const uiWrapper = document.querySelector<HTMLDivElement>(
 const bankSelects = document.querySelectorAll<HTMLInputElement>(
   '[data-selector=bankSelect]',
 );
+const bankClearButton = document.querySelector<HTMLButtonElement>(
+  '[data-selector=bankClearButton]',
+);
 const startButton = document.querySelector<HTMLButtonElement>(
   '[data-selector=startButton]',
 );
@@ -69,6 +72,7 @@ export {
   initializeButton,
   uiWrapper,
   bankSelects,
+  bankClearButton,
   startButton,
   stopButton,
   waveformSelects,

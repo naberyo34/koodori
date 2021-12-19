@@ -4,6 +4,7 @@ import {
   initializeButton,
   uiWrapper,
   bankSelects,
+  bankClearButton,
   startButton,
   stopButton,
   waveformSelects,
@@ -24,7 +25,7 @@ import {
   hihatPatternSelects,
   currentNoteIndicators,
 } from './elements';
-import { pitchNameToFrequency } from './utils';
+import { pitchNameToFrequency, defaultPhrase, defaultNoteVolume, defaultPattern } from './utils';
 
 // 初期化して使う
 let audioCtx: AudioContext;
@@ -257,6 +258,17 @@ const handleChangeBank = (e: Event) => {
   }
 };
 
+const handleClearBank = () => {
+  store.phrase[store.currentBank] = defaultPhrase;
+  store.noteGain[store.currentBank] = defaultNoteVolume;
+  // 代入だと参照が同一になってバグるため、スプレッド演算子で展開
+  store.synthPattern[store.currentBank] = [...defaultPattern];
+  store.kickPattern[store.currentBank] = [...defaultPattern];
+  store.snarePattern[store.currentBank] = [...defaultPattern];
+  store.hihatPattern[store.currentBank] = [...defaultPattern];
+  refreshDom();
+};
+
 const handleStart = () => {
   if (store.playing) return;
   store.currentNote = 0;
@@ -411,6 +423,7 @@ initializeButton?.addEventListener('click', handleInitialize);
 bankSelects.forEach((bankSelect) => {
   bankSelect.addEventListener('change', handleChangeBank);
 });
+bankClearButton?.addEventListener('click', handleClearBank);
 startButton?.addEventListener('click', handleStart);
 stopButton?.addEventListener('click', handleStop);
 waveformSelects.forEach((waveformSelect) => {

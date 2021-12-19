@@ -1,11 +1,11 @@
-import { PitchName } from "./types";
+import { PitchName } from './types';
 
 /**
  * 音名を周波数に変換して返す
  * @param pitchName 音名 (c2 - b4)
  * @returns 周波数
  */
-export const pitchNameToFrequency = (pitchName: PitchName): number => {
+const pitchNameToFrequency = (pitchName: PitchName): number => {
   const table = {
     c2: 65.406,
     'c#2': 69.296,
@@ -22,7 +22,7 @@ export const pitchNameToFrequency = (pitchName: PitchName): number => {
     c3: 130.813,
     'c#3': 138.591,
     d3: 146.832,
-    "d#3": 155.563,
+    'd#3': 155.563,
     e3: 164.814,
     f3: 174.614,
     'f#3': 184.997,
@@ -46,4 +46,51 @@ export const pitchNameToFrequency = (pitchName: PitchName): number => {
   };
 
   return table[pitchName];
+};
+
+const defaultPhrase: PitchName[] = [
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+  'c2',
+];
+
+const defaultNoteVolume = [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8];
+
+const defaultPattern = [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+];
+
+export {
+  pitchNameToFrequency,
+  defaultPhrase,
+  defaultNoteVolume,
+  defaultPattern,
 };
