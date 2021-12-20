@@ -34,6 +34,12 @@ const masterFilterFrequencyInput = document.querySelector<HTMLInputElement>(
 const masterFilterQInput = document.querySelector<HTMLInputElement>(
   '[data-selector=masterFilterQInput]',
 );
+const delayInput = document.querySelector<HTMLInputElement>(
+  '[data-selector=delayInput]',
+);
+const reverbInput = document.querySelector<HTMLInputElement>(
+  '[data-selector=reverbInput]',
+);
 const noteLengthInput = document.querySelector<HTMLInputElement>(
   '[data-selector=noteLengthInput]',
 );
@@ -81,6 +87,8 @@ export {
   masterFilterTypeSelects,
   masterFilterFrequencyInput,
   masterFilterQInput,
+  delayInput,
+  reverbInput,
   noteLengthInput,
   filterTypeSelects,
   filterFrequencyInput,

@@ -17,6 +17,8 @@ import {
   filterTypeSelects,
   filterFrequencyInput,
   filterQInput,
+  delayInput,
+  reverbInput,
   noteSelects,
   noteGainInputs,
   synthPatternSelects,
@@ -25,16 +27,27 @@ import {
   hihatPatternSelects,
   currentNoteIndicators,
 } from './elements';
-import { pitchNameToFrequency, defaultPhrase, defaultNoteVolume, defaultPattern } from './utils';
+import {
+  pitchNameToFrequency,
+  defaultPhrase,
+  defaultNoteVolume,
+  defaultPattern,
+} from './utils';
 
 // 初期化して使う
 let audioCtx: AudioContext;
 let masterGainNode: GainNode;
 let synthFilterNode: BiquadFilterNode;
 let masterFilterNode: BiquadFilterNode;
+let delayNode: DelayNode;
+let delayFeedBackNode: GainNode;
+let delayGainNode: GainNode;
+let convolverNode: ConvolverNode;
+let reverbGainNode: GainNode;
 let kickBuffer: AudioBuffer;
 let snareBuffer: AudioBuffer;
 let hihatBuffer: AudioBuffer;
+let impulseBuffer: AudioBuffer;
 let worker: Worker;
 
 /**
@@ -178,15 +191,17 @@ const refreshDom = () => {
 };
 
 /**
- * ドラムの初期化
+ * サンプル音源の初期化
  */
-const initializeDrums = async () => {
+const initializeSamples = async () => {
   const kick = await setupSample('assets/audio/kick.wav');
   const snare = await setupSample('assets/audio/snare.wav');
   const hihat = await setupSample('assets/audio/hihat.wav');
+  const impulse = await setupSample('assets/audio/impulse.wav');
   kickBuffer = kick;
   snareBuffer = snare;
   hihatBuffer = hihat;
+  impulseBuffer = impulse;
 };
 
 /**
@@ -194,6 +209,15 @@ const initializeDrums = async () => {
  */
 const initializeAudio = () => {
   audioCtx = new AudioContext();
+  masterGainNode = new GainNode(audioCtx, { gain: store.masterVolume * 0.01 });
+};
+
+/**
+ * エフェクトの初期化
+ */
+const initializeEffect = () => {
+  const secondsPerBeat = 60 / store.bpm;
+  const noteTime = secondsPerBeat * 0.75;
   synthFilterNode = new BiquadFilterNode(audioCtx, {
     type: store.currentFilter,
     frequency: store.filterFrequency,
@@ -204,8 +228,33 @@ const initializeAudio = () => {
     frequency: store.masterFilterFrequency,
     Q: store.masterFilterQ,
   });
-  masterGainNode = new GainNode(audioCtx, { gain: store.masterVolume * 0.01 });
+  delayNode = new DelayNode(audioCtx, { delayTime: noteTime });
+  delayFeedBackNode = new GainNode(audioCtx, { gain: 0.75 });
+  delayGainNode = new GainNode(audioCtx, { gain: store.delayGain * 0.01 });
+  convolverNode = new ConvolverNode(audioCtx, {
+    buffer: impulseBuffer,
+  });
+  reverbGainNode = new GainNode(audioCtx, { gain: store.reverbGain * 0.01 });
+};
+
+/**
+ * Nodeをconnectする
+ */
+const initializeRouting = () => {
+  // 原音
   synthFilterNode.connect(masterFilterNode);
+  // ディレイ
+  synthFilterNode.connect(delayNode);
+  delayNode.connect(delayFeedBackNode);
+  delayFeedBackNode.connect(delayNode);
+  delayNode.connect(delayGainNode);
+  delayGainNode.connect(masterFilterNode);
+  delayGainNode.connect(convolverNode);
+  // リバーブ
+  synthFilterNode.connect(convolverNode);
+  convolverNode.connect(reverbGainNode);
+  reverbGainNode.connect(masterFilterNode);
+  // 最終出力
   masterFilterNode.connect(masterGainNode);
   masterGainNode.connect(audioCtx.destination);
 };
@@ -235,7 +284,9 @@ const initializeWorker = () => {
 const handleInitialize = async () => {
   const activeClass = '--active';
   initializeAudio();
-  initializeDrums();
+  await initializeSamples();
+  initializeEffect();
+  initializeRouting();
   initializeWorker();
   store.initialized = true;
   initializeButton?.classList.remove(activeClass);
@@ -305,6 +356,11 @@ const handleChangeBpm = (e: Event) => {
     return;
   }
   store.bpm = value;
+
+  // テンポシンクディレイを再設定する
+  const secondsPerBeat = 60 / store.bpm;
+  const noteTime = secondsPerBeat * 0.75;
+  delayNode.delayTime.value = noteTime;
 };
 
 const handleChangeMasterVolume = (e: Event) => {
@@ -312,6 +368,7 @@ const handleChangeMasterVolume = (e: Event) => {
   const value = Number(e.currentTarget.value);
   if (value < 0 || value > 50) {
     alert('無効な値です。');
+    return;
   }
   store.masterVolume = value;
   masterGainNode.gain.value = store.masterVolume * 0.01;
@@ -346,11 +403,34 @@ const handleChangeMasterFilterQ = (e: Event) => {
   masterFilterNode.Q.value = store.masterFilterQ;
 };
 
+const handleChangeDelayGain = (e: Event) => {
+  if (!(e.currentTarget instanceof HTMLInputElement)) return;
+  const value = Number(e.currentTarget.value);
+  if (value < 0 || value > 100) {
+    alert('無効な値です。');
+    return;
+  }
+  store.delayGain = value;
+  delayGainNode.gain.value = store.delayGain * 0.01;
+};
+
+const handleChangeReverbGain = (e: Event) => {
+  if (!(e.currentTarget instanceof HTMLInputElement)) return;
+  const value = Number(e.currentTarget.value);
+  if (value < 0 || value > 100) {
+    alert('無効な値です。');
+    return;
+  }
+  store.reverbGain = value;
+  reverbGainNode.gain.value = store.reverbGain * 0.01;
+};
+
 const handleChangeNoteLength = (e: Event) => {
   if (!(e.currentTarget instanceof HTMLInputElement)) return;
   const value = Number(e.currentTarget.value);
   if (value < 0 || value > 10) {
     alert('無効な値です。');
+    return;
   }
   store.noteLength = value;
 };
@@ -442,6 +522,8 @@ masterFilterFrequencyInput?.addEventListener(
   handleChangeMasterFilterFrequency,
 );
 masterFilterQInput?.addEventListener('input', handleChangeMasterFilterQ);
+delayInput?.addEventListener('input', handleChangeDelayGain);
+reverbInput?.addEventListener('input', handleChangeReverbGain);
 noteLengthInput?.addEventListener('input', handleChangeNoteLength);
 filterTypeSelects.forEach((filterTypeSelect) => {
   filterTypeSelect.addEventListener('change', handleChangeFilterType);
