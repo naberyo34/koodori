@@ -170,6 +170,9 @@ const setupSample = async (samplePath: string) => {
  * 選択中のバンク状態をDOMに反映する
  */
 const refreshDom = () => {
+  bankSelects.forEach((bankSelect, index) => {
+    bankSelect.checked = store.currentBank === index;
+  });
   noteSelects.forEach((noteSelect, index) => {
     noteSelect.value = store.phrase[store.currentBank][index];
   });
@@ -294,18 +297,29 @@ const handleInitialize = async () => {
   refreshDom();
 };
 
-const handleChangeBank = (e: Event) => {
-  if (!(e.currentTarget instanceof HTMLInputElement)) return;
-
-  if (!store.playing || store.currentNote === 15) {
-    const value = Number(e.currentTarget.value);
-    store.currentBank = value;
-    refreshDom();
+// TODO: 雑
+const handleChangeBank = (e: Event | number) => {
+  if (typeof e === 'number') {
+    if (!store.playing || store.currentNote === 15) {
+      store.currentBank = e;
+      refreshDom();
+    } else {
+      store.reserveBank = e;
+      // バンクボタンを予約中の表示に
+      bankSelects[e].classList.add('--reserve');
+    }
   } else {
-    const value = Number(e.currentTarget.value);
-    store.reserveBank = value;
-    // バンクボタンを予約中の表示に
-    bankSelects[value].classList.add('--reserve');
+    if (!(e.currentTarget instanceof HTMLInputElement)) return;
+    if (!store.playing || store.currentNote === 15) {
+      const value = Number(e.currentTarget.value);
+      store.currentBank = value;
+      refreshDom();
+    } else {
+      const value = Number(e.currentTarget.value);
+      store.reserveBank = value;
+      // バンクボタンを予約中の表示に
+      bankSelects[value].classList.add('--reserve');
+    }
   }
 };
 
@@ -498,6 +512,37 @@ const handleChangePattern = (e: Event, index: number) => {
   }
 };
 
+// キーボード入力での操作
+const handleKeyboardInput = (e: KeyboardEvent) => {
+  switch (e.key) {
+    case '1': {
+      handleChangeBank(0);
+      break;
+    }
+    case '2': {
+      handleChangeBank(1);
+      break;
+    }
+    case '3': {
+      handleChangeBank(2);
+      break;
+    }
+    case '4': {
+      handleChangeBank(3);
+      break;
+    }
+    case ' ': {
+      if (store.playing) {
+        handleStop();
+      } else {
+        handleStart();
+      }
+    }
+    default:
+      break;
+  }
+};
+
 // イベントに関数を割当
 initializeButton?.addEventListener('click', handleInitialize);
 bankSelects.forEach((bankSelect) => {
@@ -558,3 +603,4 @@ hihatPatternSelects.forEach((hihatPatternSelect, index) => {
     handleChangePattern(e, index),
   );
 });
+document.addEventListener('keydown', handleKeyboardInput);
