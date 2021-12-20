@@ -31,6 +31,7 @@ html {
   left: 50%;
   padding: 16px;
   font-size: 48px;
+  color: #2c2c2c;
   background: #e5e5e5;
   border: none;
   border-radius: 4px;
@@ -76,24 +77,34 @@ html {
 }
 
 .radioButton {
-  position: relative;
+  display: none;
   appearance: none;
   -webkit-appearance: none;
 }
 
-.radioButton::before {
+.radioButton__label {
+  position: relative;
+  display: flex;
+  padding-left: 12px;
+}
+
+.radioButton__label::before {
   content: '';
+  position: absolute;
+  top: 2px;
+  left: 0;
   display: block;
   width: 10px;
   height: 10px;
+  margin-right: 4px;
   background: #2c2c2c;
   border-radius: 50%;
 }
 
-.radioButton:checked::after {
+.radioButton:checked + .radioButton__label::after {
   content: '';
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 0;
   display: block;
   width: 10px;
@@ -102,10 +113,6 @@ html {
   border: 2px solid #2c2c2c;
   border-radius: 50%;
   box-shadow: 0 0 4px 0 #00bfff;
-}
-
-.radioButton__label {
-  padding-left: 4px;
 }
 
 .masterControl {
@@ -133,6 +140,7 @@ html {
 }
 
 .bank {
+  display: none;
   appearance: none;
   -webkit-appearance: none;
 }
@@ -329,6 +337,8 @@ html {
   padding: 4px;
   margin-left: 4px;
   font-size: 12px;
+  color: #2c2c2c;
+  background: #fff;
   border: 2px solid #c0c0c0;
   border-radius: 4px;
   appearance: none;
